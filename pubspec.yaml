@@ -13,6 +13,7 @@ dependencies:
   flutter_bloc: ^8.1.6
   flutter_localizations:
     sdk: flutter
+  go_router: ^14.6.0
   intl: ^0.19.0
 
 dev_dependencies:
@@ -25,3 +26,30 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   generate: true
+  fonts:
+  - family: Lexend
+    fonts:
+      - asset: assets/fonts/lexend/Lexend-Black.ttf
+      - asset: assets/fonts/lexend/Lexend-Bold.ttf
+      - asset: assets/fonts/lexend/Lexend-ExtraBold.ttf
+      - asset: assets/fonts/lexend/Lexend-ExtraLight.ttf
+      - asset: assets/fonts/lexend/Lexend-Light.ttf
+      - asset: assets/fonts/lexend/Lexend-Medium.ttf
+      - asset: assets/fonts/lexend/Lexend-Regular.ttf
+      - asset: assets/fonts/lexend/Lexend-SemiBold.ttf
+      - asset: assets/fonts/lexend/Lexend-Thin.ttf
+  - family: Source Sans Pro
+    fonts:
+      - asset: assets/fonts/source_sans_pro/SourceSansPro-Black.ttf
+      - asset: assets/fonts/source_sans_pro/SourceSansPro-BlackItalic.ttf
+      - asset: assets/fonts/source_sans_pro/SourceSansPro-Bold.ttf
+      - asset: assets/fonts/source_sans_pro/SourceSansPro-BoldItalic.ttf
+      - asset: assets/fonts/source_sans_pro/SourceSansPro-ExtraLight.ttf
+      - asset: assets/fonts/source_sans_pro/SourceSansPro-ExtraLightItalic.ttf
+      - asset: assets/fonts/source_sans_pro/SourceSansPro-Italic.ttf
+      - asset: assets/fonts/source_sans_pro/SourceSansPro-Light.ttf
+      - asset: assets/fonts/source_sans_pro/SourceSansPro-LightItalic.ttf
+      - asset: assets/fonts/source_sans_pro/SourceSansPro-Regular.ttf
+      - asset: assets/fonts/source_sans_pro/SourceSansPro-SemiBold.ttf
+      - asset: assets/fonts/source_sans_pro/SourceSansPro-SemiBoldItalic.ttf
+

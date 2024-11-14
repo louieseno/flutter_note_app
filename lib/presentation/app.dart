@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_note_app/counter/counter.dart';
-import 'package:flutter_note_app/l10n/l10n.dart';
+import 'package:flutter_note_app/core/l10n/l10n.dart';
+import 'package:flutter_note_app/core/route/app_route.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: AppRoute.router,
       theme: ThemeData(
         appBarTheme: AppBarTheme(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -16,7 +17,6 @@ class App extends StatelessWidget {
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const CounterPage(),
     );
   }
 }
