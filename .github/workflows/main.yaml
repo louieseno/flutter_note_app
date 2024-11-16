@@ -21,8 +21,8 @@ jobs:
     with:
       flutter_channel: stable
       flutter_version: 3.24.4
-      test_optimization: false
-      test_recursion: false
+      analyze_directories: lib
+      format_directories: lib
 
   spell-check:
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/spell_check.yml@v1
