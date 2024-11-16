@@ -46,10 +46,10 @@ This layer handles the retrieval or manipulation of data from one or more source
 
 The data layer is split into two parts:
  - Data Source
-    Usually exposes APIs to perform different operation in manipulating data.
+    - Usually exposes APIs to perform different operation in manipulating data.
     
  - Model
-    Represent the core business objects, often reflecting real-world entities. These models possessed properties specific to them and encapsulated behavior through their methods.
+    - Represent the core business objects, often reflecting real-world entities. These models possessed properties specific to them and encapsulated behavior through their methods.
 
 This layer is the lowest level of the application and interacts with databases, network requests, and other asynchronous data sources.
 
@@ -64,8 +64,9 @@ In this layer you can add data transformation such as sorting, ordering, and fil
 The data layer is split into two parts:
 
  - Pages
-    This is the layer the user sees and interacts with to create events.
+    - This is the layer the user sees and interacts with to create events.
 
  - BLoC
-    Write all our business logic functionalities here and do most of our error handling and exceptions. 
+    - Write all our business logic functionalities here and do most of our error handling and exceptions. 
+    
 ---
