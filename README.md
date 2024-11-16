@@ -68,5 +68,12 @@ The data layer is split into two parts:
 
  - BLoC
     - Write all our business logic functionalities here and do most of our error handling and exceptions. 
-    
+
 ---
+
+[coverage_badge]: coverage_badge.svg
+[license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
+[license_link]: https://opensource.org/licenses/MIT
+[very_good_analysis_badge]: https://img.shields.io/badge/style-very_good_analysis-B22C89.svg
+[very_good_analysis_link]: https://pub.dev/packages/very_good_analysis
+[very_good_cli_link]: https://github.com/VeryGoodOpenSource/very_good_cli
