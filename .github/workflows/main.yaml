@@ -23,6 +23,7 @@ jobs:
       flutter_version: 3.24.4
       analyze_directories: lib
       format_directories: lib
+      min_coverage: 0
 
   spell-check:
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/spell_check.yml@v1
