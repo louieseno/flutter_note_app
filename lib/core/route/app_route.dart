@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/widgets.dart';
-import 'package:flutter_note_app/presentation/not_found/not_found_page.dart';
-import 'package:flutter_note_app/presentation/note_item/note_item_page.dart';
-import 'package:flutter_note_app/presentation/note_list/note_list_page.dart';
+import 'package:flutter_note_app/data/model/note/note_model.dart';
+import 'package:flutter_note_app/presentation/pages/not_found/not_found_page.dart';
+import 'package:flutter_note_app/presentation/pages/note_item/note_item_page.dart';
+import 'package:flutter_note_app/presentation/pages/note_list/note_list_page.dart';
 import 'package:go_router/go_router.dart';
 
 typedef AppRouteRecord = ({String name, String path});
@@ -27,11 +30,15 @@ class AppRoute {
             path: NoteItemPage.route.path,
             name: NoteItemPage.route.name,
             builder: (BuildContext context, GoRouterState state) {
-              String? noteID;
+              Note? note;
               if (state.extra is RouteExtra) {
-                noteID = (state.extra! as RouteExtra)['noteID'];
+                final extra = state.extra! as RouteExtra;
+                final initialNote =
+                    jsonDecode(extra['note'] ?? '') as Map<String, dynamic>;
+                note = Note.fromJson(initialNote);
               }
-              return NoteItemPage(noteID: noteID);
+
+              return NoteItemPage(initialNote: note);
             },
           ),
         ],

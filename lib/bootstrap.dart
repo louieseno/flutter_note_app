@@ -1,8 +1,10 @@
-import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_note_app/data/data_source/note_api.dart';
+import 'package:flutter_note_app/domain/repository/note_repository.dart';
+import 'package:flutter_note_app/presentation/app.dart';
 
 class AppBlocObserver extends BlocObserver {
   const AppBlocObserver();
@@ -18,16 +20,25 @@ class AppBlocObserver extends BlocObserver {
     log('onError(${bloc.runtimeType}, $error, $stackTrace)');
     super.onError(bloc, error, stackTrace);
   }
+
+  @override
+  void onClose(BlocBase<dynamic> bloc) {
+    log('onClose -- bloc: ${bloc.runtimeType}');
+    super.onClose(bloc);
+  }
 }
 
-Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
+void bootstrap({required NoteApi noteApi}) {
   FlutterError.onError = (details) {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
 
   Bloc.observer = const AppBlocObserver();
 
-  // Add cross-flavor configuration here
+  /// Add cross-flavor configuration here
 
-  runApp(await builder());
+  ///! Note: Currently all flavors using same API Storage which is local.
+  final noteRepository = NoteRepository(noteApi: noteApi);
+
+  runApp(App(noteRepository: noteRepository));
 }

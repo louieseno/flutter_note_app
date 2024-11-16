@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_note_app/core/widget/app_text.dart';
-import 'package:flutter_note_app/presentation/note_list/note_list_page.dart';
+import 'package:flutter_note_app/presentation/pages/note_list/note_list_page.dart';
 import 'package:go_router/go_router.dart';
 
 class NotFoundPage extends StatelessWidget {
