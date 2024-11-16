@@ -89,43 +89,51 @@ class _NoteListState extends State<_NoteList>
                     );
                   }
                 },
-                child: ListView.separated(
-                  itemBuilder: (context, index) {
-                    final note = state.notes[index];
-                    return InkWell(
-                      onTap: () => context.goNamed(
-                        NoteItemPage.route.name,
-                        extra: {'note': jsonEncode(note)},
-                      ),
-                      child: Slidable(
-                        key: Key(note.id),
-                        endActionPane: ActionPane(
-                          motion: const ScrollMotion(),
-                          children: [
-                            SlidableAction(
-                              onPressed: (_) {
-                                controller.close();
-                                context
-                                    .read<DeleteNoteBloc>()
-                                    .add(DeleteNoteEvent.deletNote(note.id));
-                              },
-                              backgroundColor: Colors.red,
-                              foregroundColor: Colors.white,
-                              icon: Icons.delete,
-                              label: 'Delete',
-                            ),
-                          ],
-                        ),
-                        child: ListTile(
-                          title: AppText.title2(text: note.title),
-                          subtitle: AppText.regular1(text: note.content),
-                        ),
-                      ),
-                    );
+                child: RefreshIndicator(
+                  onRefresh: () async {
+                    context
+                        .read<NoteListBloc>()
+                        .add(const NoteListEvent.getNotes());
+                    return Future.value();
                   },
-                  separatorBuilder: (BuildContext _, int __) =>
-                      const SizedBox.shrink(),
-                  itemCount: state.notes.length,
+                  child: ListView.separated(
+                    itemBuilder: (context, index) {
+                      final note = state.notes[index];
+                      return InkWell(
+                        onTap: () => context.goNamed(
+                          NoteItemPage.route.name,
+                          extra: {'note': jsonEncode(note)},
+                        ),
+                        child: Slidable(
+                          key: Key(note.id),
+                          endActionPane: ActionPane(
+                            motion: const ScrollMotion(),
+                            children: [
+                              SlidableAction(
+                                onPressed: (_) {
+                                  controller.close();
+                                  context
+                                      .read<DeleteNoteBloc>()
+                                      .add(DeleteNoteEvent.deletNote(note.id));
+                                },
+                                backgroundColor: Colors.red,
+                                foregroundColor: Colors.white,
+                                icon: Icons.delete,
+                                label: 'Delete',
+                              ),
+                            ],
+                          ),
+                          child: ListTile(
+                            title: AppText.title2(text: note.title),
+                            subtitle: AppText.regular1(text: note.content),
+                          ),
+                        ),
+                      );
+                    },
+                    separatorBuilder: (BuildContext _, int __) =>
+                        const SizedBox.shrink(),
+                    itemCount: state.notes.length,
+                  ),
                 ),
               );
           }

@@ -22,155 +22,50 @@ To run the desired flavor either use the launch configuration in VSCode/Android 
 
 ```sh
 # Development
-$ flutter run --flavor development --target lib/main_development.dart
+$ fvm flutter run --flavor development --target lib/main_development.dart
 
 # Staging
-$ flutter run --flavor staging --target lib/main_staging.dart
+$ fvm flutter run --flavor staging --target lib/main_staging.dart
 
 # Production
-$ flutter run --flavor production --target lib/main_production.dart
+$ fvm flutter run --flavor production --target lib/main_production.dart
 ```
 
-_\*Flutter Note App works on iOS, Android, Web, and Windows._
+_\*Flutter Note App was only tested on iOS, Web, and macOS._
 
 ---
 
-## Running Tests 🧪
+## Architecture
 
-To run all unit and widget tests use the following command:
+### Core
+This layer contains subdirectories for configurations, widgets(either stateful or stateless), and platform-specific helpers. 
 
-```sh
-$ flutter test --coverage --test-randomize-ordering-seed random
-```
+### Data 
+This layer handles the retrieval or manipulation of data from one or more source.
 
-To view the generated coverage report you can use [lcov](https://github.com/linux-test-project/lcov).
 
-```sh
-# Generate Coverage Report
-$ genhtml coverage/lcov.info -o coverage/
+The data layer is split into two parts:
+ - Data Source
+    Usually exposes APIs to perform different operation in manipulating data.
+    
+ - Model
+    Represent the core business objects, often reflecting real-world entities. These models possessed properties specific to them and encapsulated behavior through their methods.
 
-# Open Coverage Report
-$ open coverage/index.html
-```
+This layer is the lowest level of the application and interacts with databases, network requests, and other asynchronous data sources.
 
+_\*Flutter Note App only utilized local storage to mock the network call._
+
+### Domain 
+This layer orchestrate the flow of data between Data and Bloc layer.
+
+In this layer you can add data transformation such as sorting, ordering, and filtering before handing the result to the business logic layer.
+
+### Presentation 
+The data layer is split into two parts:
+
+ - Pages
+    This is the layer the user sees and interacts with to create events.
+
+ - BLoC
+    Write all our business logic functionalities here and do most of our error handling and exceptions. 
 ---
-
-## Working with Translations 🌐
-
-This project relies on [flutter_localizations][flutter_localizations_link] and follows the [official internationalization guide for Flutter][internationalization_link].
-
-### Adding Strings
-
-1. To add a new localizable string, open the `app_en.arb` file at `lib/l10n/arb/app_en.arb`.
-
-```arb
-{
-    "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
-    }
-}
-```
-
-2. Then add a new key/value and description
-
-```arb
-{
-    "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
-    },
-    "helloWorld": "Hello World",
-    "@helloWorld": {
-        "description": "Hello World Text"
-    }
-}
-```
-
-3. Use the new string
-
-```dart
-import 'package:flutter_note_app/l10n/l10n.dart';
-
-@override
-Widget build(BuildContext context) {
-  final l10n = context.l10n;
-  return Text(l10n.helloWorld);
-}
-```
-
-### Adding Supported Locales
-
-Update the `CFBundleLocalizations` array in the `Info.plist` at `ios/Runner/Info.plist` to include the new locale.
-
-```xml
-    ...
-
-    <key>CFBundleLocalizations</key>
-	<array>
-		<string>en</string>
-		<string>es</string>
-	</array>
-
-    ...
-```
-
-### Adding Translations
-
-1. For each supported locale, add a new ARB file in `lib/l10n/arb`.
-
-```
-├── l10n
-│   ├── arb
-│   │   ├── app_en.arb
-│   │   └── app_es.arb
-```
-
-2. Add the translated strings to each `.arb` file:
-
-`app_en.arb`
-
-```arb
-{
-    "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
-    }
-}
-```
-
-`app_es.arb`
-
-```arb
-{
-    "@@locale": "es",
-    "counterAppBarTitle": "Contador",
-    "@counterAppBarTitle": {
-        "description": "Texto mostrado en la AppBar de la página del contador"
-    }
-}
-```
-
-### Generating Translations
-
-To use the latest translations changes, you will need to generate them:
-
-1. Generate localizations for the current project:
-
-```sh
-flutter gen-l10n --arb-dir="lib/l10n/arb"
-```
-
-Alternatively, run `flutter run` and code generation will take place automatically.
-
-[coverage_badge]: coverage_badge.svg
-[flutter_localizations_link]: https://api.flutter.dev/flutter/flutter_localizations/flutter_localizations-library.html
-[internationalization_link]: https://flutter.dev/docs/development/accessibility-and-localization/internationalization
-[license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
-[license_link]: https://opensource.org/licenses/MIT
-[very_good_analysis_badge]: https://img.shields.io/badge/style-very_good_analysis-B22C89.svg
-[very_good_analysis_link]: https://pub.dev/packages/very_good_analysis
-[very_good_cli_link]: https://github.com/VeryGoodOpenSource/very_good_cli

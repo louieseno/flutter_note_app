@@ -13,6 +13,7 @@ class NoteListBloc extends Bloc<NoteListEvent, NoteListState> {
     on<NoteListEvent>((event, emit) async {
       await event.when(
         getNotes: () async {
+          emit(state.copyWith(status: NoteListStatus.loading));
           await emit.forEach<List<Note>>(
             noteRepository.getNotes(),
             onData: (List<Note> notes) => state.copyWith(

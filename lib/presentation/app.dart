@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_note_app/core/l10n/l10n.dart';
 import 'package:flutter_note_app/core/route/app_route.dart';
 import 'package:flutter_note_app/domain/repository/note_repository.dart';
 
@@ -24,6 +23,7 @@ class _AppView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       routerConfig: AppRoute.router,
       theme: ThemeData(
         appBarTheme: AppBarTheme(
@@ -31,8 +31,6 @@ class _AppView extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
     );
   }
 }
